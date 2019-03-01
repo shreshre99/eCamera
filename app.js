@@ -12,9 +12,9 @@ const cameraView = document.querySelector("#camera--view"),
       cameraTrigger = document.querySelector("#camera--trigger")
 
 
-navigator.mediaDevices.getUserMedia({video: true})
+/*navigator.mediaDevices.getUserMedia({video: true})
   .then(gotMedia)
-  .catch(error => console.error('getUserMedia() error:', error));
+  .catch(error => console.error('getUserMedia() error:', error));*/
 
 /*function gotMedia(mediaStream) {
   const mediaStreamTrack = mediaStream.getVideoTracks()[0];
@@ -22,16 +22,16 @@ navigator.mediaDevices.getUserMedia({video: true})
   console.log(imageCapture);
 }*/
 
-function cameraStart(mediaStream) {
-    /*navigator.mediaDevices
+function cameraStart() {
+    navigator.mediaDevices
         .getUserMedia(constraints)
-        .then(function(stream) {*/
-        track = mediaStream.getTracks()[0];
-        cameraView.srcObject = mediaStream;
-/*    })
+        .then(function(stream) {
+        track = stream.getTracks()[0];
+        cameraView.srcObject = stream;
+    })
     .catch(function(error) {
         console.error("Oops. Something is broken.", error);
-    });*/
+    });
 }
 
 cameraTrigger.onclick = function() {
