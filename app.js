@@ -11,8 +11,8 @@ function cameraStart() {
         .getUserMedia(constraints)
         .then(function(stream) {
         track = stream.getTracks()[0];
-        const capabilities = mediaStreamTrack.getCapabilities();
-        const settings = mediaStreamTrack.getSettings();
+        const capabilities = track.getCapabilities();
+        const settings = track.getSettings();
         settings.height = 300;
         settings.width = 330;
         cameraView.srcObject = stream;
