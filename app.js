@@ -6,20 +6,27 @@ const cameraView = document.querySelector("#camera--view"),
       cameraSensor = document.querySelector("#camera--sensor"),
       cameraTrigger = document.querySelector("#camera--trigger")
 
-function cameraStart() {
-    navigator.mediaDevices
+
+navigator.mediaDevices.getUserMedia({video: true})
+  .then(gotMedia)
+  .catch(error => console.error('getUserMedia() error:', error));
+
+/*function gotMedia(mediaStream) {
+  const mediaStreamTrack = mediaStream.getVideoTracks()[0];
+  const imageCapture = new ImageCapture(mediaStreamTrack);
+  console.log(imageCapture);
+}*/
+
+function cameraStart(mediaStream) {
+    /*navigator.mediaDevices
         .getUserMedia(constraints)
-        .then(function(stream) {
-        track = stream.getTracks()[0];
-        const capabilities = track.getCapabilities();
-        const settings = track.getSettings();
-        settings.height = 300;
-        settings.width = 330;
-        cameraView.srcObject = stream;
-    })
+        .then(function(stream) {*/
+        track = mediaStream.getTracks()[0];
+        cameraView.srcObject = mediaStream;
+/*    })
     .catch(function(error) {
         console.error("Oops. Something is broken.", error);
-    });
+    });*/
 }
 
 cameraTrigger.onclick = function() {
