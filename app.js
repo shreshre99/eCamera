@@ -39,15 +39,15 @@ navigator.mediaDevices.getUserMedia({video: true})
 
 
 function cameraStart(mediaStream) {
-    navigator.mediaDevices
+/*    navigator.mediaDevices
         .getUserMedia(constraints)
-        .then(function(stream) {
+        .then(function(stream)*/ 
         track = mediaStream.getTracks()[0];
         cameraView.srcObject = mediaStream;
-    })
-    .catch(function(error) {
+    
+    /*.catch(function(error) {
         console.error("Oops. Something is broken.", error);
-    });
+    });*/
 }
 
 
