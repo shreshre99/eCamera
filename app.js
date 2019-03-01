@@ -12,22 +12,6 @@ const cameraView = document.querySelector("#camera--view"),
       cameraTrigger = document.querySelector("#camera--trigger")
 
 
-/*navigator.mediaDevices.getUserMedia({ video: true })
-    .then(mediaStream => {
-
-        const track = mediaStream.getVideoTracks()[0];
-
-        let zoom = document.querySelector('#zoom');
-        const capabilities = track.getCapabilities()
-        // Check whether zoom is supported or not.
-        if (!capabilities.zoom) {
-            return;
-        }track.applyConstraints({advanced : [{zoom: zoom.value}] });
-
-        let imageCapture = new ImageCapture(track);
-
-})*/
-
 navigator.mediaDevices.getUserMedia({video: true})
   .then(gotMedia)
   .catch(error => console.error('getUserMedia() error:', error));
@@ -35,21 +19,20 @@ navigator.mediaDevices.getUserMedia({video: true})
 /*function gotMedia(mediaStream) {
   const mediaStreamTrack = mediaStream.getVideoTracks()[0];
   const imageCapture = new ImageCapture(mediaStreamTrack);
-  console.log(imageCapture);*/
-
+  console.log(imageCapture);
+}*/
 
 function cameraStart(mediaStream) {
-/*    navigator.mediaDevices
+    /*navigator.mediaDevices
         .getUserMedia(constraints)
-        .then(function(stream)*/ 
+        .then(function(stream) {*/
         track = mediaStream.getTracks()[0];
         cameraView.srcObject = mediaStream;
-    
-    /*.catch(function(error) {
+/*    })
+    .catch(function(error) {
         console.error("Oops. Something is broken.", error);
     });*/
 }
-
 
 cameraTrigger.onclick = function() {
     cameraSensor.width = cameraView.videoWidth;
