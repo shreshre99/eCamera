@@ -24,7 +24,7 @@ navigator.mediaDevices.getUserMedia({ video: true })
             return;
         }track.applyConstraints({advanced : [{zoom: zoom.value}] });
 
-        let cameraView.srcObject = new ImageCapture(track);
+        cameraView.srcObject = new ImageCapture(track);
 
 
 })
