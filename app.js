@@ -23,8 +23,8 @@ function cameraStart() {
     navigator.mediaDevices
         .getUserMedia(constraints)
         .then(function(stream) {
-            track = stream.getVideoTracks()[0];
-            cameraView.srcObject = stream;
+        track = stream.getTracks()[0];
+        cameraView.srcObject = stream;
     })
     .catch(function(error) {
         console.error("Oops. Something is broken.", error);
