@@ -24,8 +24,7 @@ for(i=0,j=properties.length;i<j;i++){
       prop = properties[i];
       break;
     }
-}
-
+} 
 
 
 // Define constants
