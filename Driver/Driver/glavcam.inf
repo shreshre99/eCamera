@@ -1,0 +1,333 @@
+;
+; This file contains installation information for GL cams
+; Copyright(c) 2009 Genesys Logic Inc.
+;
+
+[Version]
+signature="$CHICAGO$"
+;Class=Media
+;ClassGUID={4d36e96c-e325-11ce-bfc1-08002be10318}
+Class=Image
+ClassGUID={6bdd1fc6-810f-11d0-bec7-08002be2092f}
+Provider=%GLft%
+Catalogfile=glavcam.cat
+DriverVer=02/20/2013,%glavcam.DisplayVersion%
+
+[SourceDisksNames]
+1000=%cdname%,,,
+
+[SourceDisksFiles.x86]
+glavcam.sys=1000
+glprop.ax=1000
+uninstall.dll=1000
+
+[SourceDisksFiles.amd64]
+glavcam.sys=1000,.\x64
+glprop.ax=1000
+uninstall.dll=1000,.\x64
+
+[DestinationDirs]
+DefaultDestDir=12
+glavcam.CopyFiles=12
+glavcam.CopyFiles.Ext32=11
+glavcam.CopyFiles.Ext64=10,SysWOW64
+
+[glavcam.CopyFiles]
+glavcam.sys
+
+[glavcam.CopyFiles.Ext32]
+glprop.ax
+uninstall.dll
+
+[glavcam.CopyFiles.Ext64]
+glprop.ax
+uninstall.dll
+
+[Manufacturer]
+%GLft%=GL,NT.5,NT.6,NTamd64
+
+[GL.NT.5]
+%glavcam.DeviceDesc%=glavcam,GLAVCAM
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0503		;GL cam
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0505		;GL cam
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0510		;GL cam
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0511		;GL cam
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0512		;GL cam
+
+[GL.NT.6]
+%glavcam.DeviceDesc%=glavcam,GLAVCAM
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0503&MI_00		;GL cam
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0505&MI_00		;GL cam
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0510&MI_00		;GL cam
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0511&MI_00		;GL cam
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0512&MI_00		;GL cam
+
+[GL.NTamd64]
+%glavcam.DeviceDesc%=glavcam,GLAVCAM
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0503&MI_00		;GL cam
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0505&MI_00		;GL cam
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0510&MI_00		;GL cam
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0511&MI_00		;GL cam
+%glavcam.DeviceDesc%=glavcam, USB\VID_05E3&PID_0512&MI_00		;GL cam
+
+
+;---------------------------------------------------------------
+;                x 86  D D I n s t a l l
+;---------------------------------------------------------------
+
+[glavcam.NT]
+Include=ks.inf, KSCAPTUR.inf, ksfilter.inf, sti.inf
+Needs=KS.Registration, Stream.Registration, KSCAPTUR.Registration.NT, STI.WIAVideo.Registration
+CopyFiles=glavcam.CopyFiles, glavcam.CopyFiles.Ext32
+AddReg=glavcam.NT.AddReg
+; WIA
+SubClass=StillImage
+DeviceType=3
+DeviceSubType=0x1
+Capabilities=0x00000031
+Events=glavcam.Events
+DeviceData=glavcam.DeviceData
+ICMProfiles="sRGB Color Space Profile.icm"
+
+[glavcam.Events]
+; These are events that the device issues to trigger application launching.
+
+;---------------------------------------------------------------
+;                A M D 64  D D I n s t a l l
+;---------------------------------------------------------------
+
+[glavcam.NTamd64]
+Include=ks.inf, KSCAPTUR.inf, ksfilter.inf, sti.inf
+Needs=KS.Registration, Stream.Registration, KSCAPTUR.Registration.NT, STI.WIAVideo.Registration
+CopyFiles=glavcam.CopyFiles, glavcam.CopyFiles.Ext64
+AddReg=glavcam.NTamd64.AddReg
+; WIA
+SubClass=StillImage
+DeviceType=3
+DeviceSubType=0x1
+Capabilities=0x00000031
+Events=glavcam.Events
+DeviceData=glavcam.DeviceData
+ICMProfiles="sRGB Color Space Profile.icm"
+
+;---------------------------------------------------------------
+;                I n t e r f a c e s
+;---------------------------------------------------------------
+
+[glavcam.NT.Interfaces]
+AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",CaptureInterface.NT,
+AddInterface=%KSCATEGORY_VIDEO%,"GLOBAL",CaptureInterface.NT,
+
+[glavcam.NTamd64.Interfaces]
+AddInterface=%KSCATEGORY_CAPTURE%,"GLOBAL",CaptureInterface.NT,
+AddInterface=%KSCATEGORY_VIDEO%,"GLOBAL",CaptureInterface.NT,
+
+[CaptureInterface.NT]
+AddReg=glavcam.Reader.AddReg	;, glavcam.MemoryPreferences.AddReg
+
+;---------------------------------------------------------------
+;                A d d R e g
+;---------------------------------------------------------------
+
+[glavcam.Reader.AddReg]
+HKR,,CLSID,,%Proxy.CLSID%
+;HKR,PageAliases,"{71F96464-78F3-11d0-A18C-00A0C9118956}",1,0,0,0,0, 13,47, d2,11, 0xba, 0x41, 0x0, 0xa0, 0xc9, 0xd, 0x2b, 0x5
+HKR,PageAliases,"{71F96465-78F3-11d0-A18C-00A0C9118956}",1,0,0,0,0, 13,47, d2,11, 0xba, 0x41, 0x0, 0xa0, 0xc9, 0xd, 0x2b, 0x5
+HKR,,FriendlyName,,%glavcam.Reader.FriendlyName%
+
+[glavcam.NT.AddReg]	;WT added
+HKR,,SelSuspend,0x0010001, 0x00000000
+HKR,,RotateImage,0x0010001, 0x00000000
+HKR,,BulkMode,0x0010001, 0x00000000
+HKR,,DropFrames,0x0010001, 0x0000000C
+HKR,,EnableLED,0x0010001, 0x00000001
+HKR,,FriendlyName,,%glavcam.Reader.FriendlyName%	 ;this key is modified by system during intallation, use RunOnce to modify it again... 
+HKR,"extra",NumResolutions,0x0010001, 14
+HKR,"extra\1",dst,0x0010001, 0x02580320 ;800x600
+HKR,"extra\1",src,0x0010001, 0x01E00280
+HKR,"extra\2",dst,0x0010001, 0x03000400 ;1024x768
+HKR,"extra\2",src,0x0010001, 0x01E00280
+HKR,"extra\3",dst,0x0010001, 0x02D00500 ;1280x720
+HKR,"extra\3",src,0x0010001, 0x01E00280
+HKR,"extra\4",dst,0x0010001, 0x03C00500 ;1280x960
+HKR,"extra\4",src,0x0010001, 0x01E00280
+HKR,"extra\5",dst,0x0010001, 0x04000500 ;1280x1024
+HKR,"extra\5",src,0x0010001, 0x01E00280
+HKR,"extra\6",dst,0x0010001, 0x04B00640 ;1600x1200
+HKR,"extra\6",src,0x0010001, 0x01E00280
+HKR,"extra\7",dst,0x0010001, 0x04380780 ;1920x1080
+HKR,"extra\7",src,0x0010001, 0x01E00280
+HKR,"extra\8",dst,0x0010001, 0x07980A20 ;2592x1944
+HKR,"extra\8",src,0x0010001, 0x01E00280
+HKR,"extra\9",dst,0x0010001, 0x08580B20 ;2848x2136
+HKR,"extra\9",src,0x0010001, 0x01E00280
+HKR,"extra\10",dst,0x0010001, 0x09900CC0 ;3264x2448
+HKR,"extra\10",src,0x0010001, 0x01E00280
+HKR,"extra\11",dst,0x0010001, 0x0AB00E40 ;3648x2736
+HKR,"extra\11",src,0x0010001, 0x01E00280
+HKR,"extra\12",dst,0x0010001, 0x0BB80FA0 ;4000x3000
+HKR,"extra\12",src,0x0010001, 0x01E00280
+HKR,"extra\13",dst,0x0010001, 0x0F1E1428 ;5160x3870
+HKR,"extra\13",src,0x0010001, 0x01E00280
+HKR,"extra\14",dst,0x0010001, 0x128618B4 ;6324x4742
+HKR,"extra\14",src,0x0010001, 0x01E00280
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\{9897BBD8-013A-49F3-928E-866A59B6E00C}","DisplayName",0x00000000,"%glavcam.DeviceDesc%"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\{9897BBD8-013A-49F3-928E-866A59B6E00C}","DisplayVersion",0x00000000,"%glavcam.DisplayVersion%"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\{9897BBD8-013A-49F3-928E-866A59B6E00C}","Publisher",0x00000000,"%GLft%"
+HKLM,"Software\Microsoft\Windows\CurrentVersion\Uninstall\{9897BBD8-013A-49F3-928E-866A59B6E00C}","UninstallString",0x00000000,"rundll32.exe %11%\uninstall.dll, Uninstall"
+
+; ICustomProp
+HKCR,CLSID\{A0BAE220-5B56-402a-AF2A-EF62567366BC},,,%PlugIn_CustomInterface%
+HKCR,CLSID\{A0BAE220-5B56-402a-AF2A-EF62567366BC}\InprocServer32,,,glprop.ax
+HKCR,CLSID\{A0BAE220-5B56-402a-AF2A-EF62567366BC}\InprocServer32,ThreadingModel,,Both
+; This IID is aggregated for the filter given the CLSID of the property set
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{A0BAE220-5B56-402a-AF2A-EF62567366BC},,,%PlugIn_CustomInterface%
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{A0BAE220-5B56-402a-AF2A-EF62567366BC},IID,1,20,E2,BA,A0, 56,5b, 2A,40, 0xAF, 0x2A, 0xEF, 0x62, 0x56, 0x73, 0x66, 0xBC
+
+; Special Effect Property Page
+HKCR,CLSID\{95EAE60A-0D64-43b0-9787-BBD2421AA093},,,%PropPage_SPEFProp%
+HKCR,CLSID\{95EAE60A-0D64-43b0-9787-BBD2421AA093}\InprocServer32,,,glprop.ax
+HKCR,CLSID\{95EAE60A-0D64-43b0-9787-BBD2421AA093}\InprocServer32,ThreadingModel,,Both
+; Associate the property set with the above property page
+HKLM,System\CurrentControlSet\Control\MediaSets\{A0BAE220-5B56-402a-AF2A-EF62567366BC}\PropertyPages\{95EAE60A-0D64-43b0-9787-BBD2421AA093},,,%PropPage_SPEFProp%
+
+; Zoom Effect Property Page
+HKCR,CLSID\{4F6493FC-1A85-418a-B196-7FFDE9643A55},,,%PropPage_ZoomProp%
+HKCR,CLSID\{4F6493FC-1A85-418a-B196-7FFDE9643A55}\InprocServer32,,,glprop.ax
+HKCR,CLSID\{4F6493FC-1A85-418a-B196-7FFDE9643A55}\InprocServer32,ThreadingModel,,Both
+; Associate the property set with the above property page
+HKLM,System\CurrentControlSet\Control\MediaSets\{A0BAE220-5B56-402a-AF2A-EF62567366BC}\PropertyPages\{4F6493FC-1A85-418a-B196-7FFDE9643A55},,,%PropPage_ZoomProp%
+
+[glavcam.NTamd64.AddReg]	;WT added
+HKR,,SelSuspend,0x0010001, 0x00000000
+HKR,,RotateImage,0x0010001, 0x00000000
+HKR,,BulkMode,0x0010001, 0x00000000
+HKR,,DropFrames,0x0010001, 0x0000000C
+HKR,,EnableLED,0x0010001, 0x00000001
+HKR,,FriendlyName,,%glavcam.Reader.FriendlyName%	 ;this key is modified by system during intallation, use RunOnce to modify it again... 
+HKR,"extra",NumResolutions,0x0010001, 14
+HKR,"extra\1",dst,0x0010001, 0x02580320 ;800x600
+HKR,"extra\1",src,0x0010001, 0x01E00280
+HKR,"extra\2",dst,0x0010001, 0x03000400 ;1024x768
+HKR,"extra\2",src,0x0010001, 0x01E00280
+HKR,"extra\3",dst,0x0010001, 0x02D00500 ;1280x720
+HKR,"extra\3",src,0x0010001, 0x01E00280
+HKR,"extra\4",dst,0x0010001, 0x03C00500 ;1280x960
+HKR,"extra\4",src,0x0010001, 0x01E00280
+HKR,"extra\5",dst,0x0010001, 0x04000500 ;1280x1024
+HKR,"extra\5",src,0x0010001, 0x01E00280
+HKR,"extra\6",dst,0x0010001, 0x04B00640 ;1600x1200
+HKR,"extra\6",src,0x0010001, 0x01E00280
+HKR,"extra\7",dst,0x0010001, 0x04380780 ;1920x1080
+HKR,"extra\7",src,0x0010001, 0x01E00280
+HKR,"extra\8",dst,0x0010001, 0x07980A20 ;2592x1944
+HKR,"extra\8",src,0x0010001, 0x01E00280
+HKR,"extra\9",dst,0x0010001, 0x08580B20 ;2848x2136
+HKR,"extra\9",src,0x0010001, 0x01E00280
+HKR,"extra\10",dst,0x0010001, 0x09900CC0 ;3264x2448
+HKR,"extra\10",src,0x0010001, 0x01E00280
+HKR,"extra\11",dst,0x0010001, 0x0AB00E40 ;3648x2736
+HKR,"extra\11",src,0x0010001, 0x01E00280
+HKR,"extra\12",dst,0x0010001, 0x0BB80FA0 ;4000x3000
+HKR,"extra\12",src,0x0010001, 0x01E00280
+HKR,"extra\13",dst,0x0010001, 0x0F1E1428 ;5160x3870
+HKR,"extra\13",src,0x0010001, 0x01E00280
+HKR,"extra\14",dst,0x0010001, 0x128618B4 ;6324x4742
+HKR,"extra\14",src,0x0010001, 0x01E00280
+HKLM,"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{9897BBD8-013A-49F3-928E-866A59B6E00C}","DisplayName",0x00000000,"%glavcam.DeviceDesc%"
+HKLM,"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{9897BBD8-013A-49F3-928E-866A59B6E00C}","DisplayVersion",0x00000000,"%glavcam.DisplayVersion%"
+HKLM,"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{9897BBD8-013A-49F3-928E-866A59B6E00C}","Publisher",0x00000000,"%GLft%"
+HKLM,"Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\{9897BBD8-013A-49F3-928E-866A59B6E00C}","UninstallString",0x00000000,"rundll32.exe %10%\SysWOW64\uninstall.dll, Uninstall"
+
+; ICustomProp
+HKCR,CLSID\{A0BAE220-5B56-402a-AF2A-EF62567366BC},,,%PlugIn_CustomInterface%
+HKCR,CLSID\{A0BAE220-5B56-402a-AF2A-EF62567366BC}\InprocServer32,,,glprop.ax
+HKCR,CLSID\{A0BAE220-5B56-402a-AF2A-EF62567366BC}\InprocServer32,ThreadingModel,,Both
+HKCR,Wow6432Node\CLSID\{A0BAE220-5B56-402a-AF2A-EF62567366BC},,,%PlugIn_CustomInterface%
+HKCR,Wow6432Node\CLSID\{A0BAE220-5B56-402a-AF2A-EF62567366BC}\InprocServer32,,,glprop.ax
+HKCR,Wow6432Node\CLSID\{A0BAE220-5B56-402a-AF2A-EF62567366BC}\InprocServer32,ThreadingModel,,Both
+; This IID is aggregated for the filter given the CLSID of the property set
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{A0BAE220-5B56-402a-AF2A-EF62567366BC},,,%PlugIn_CustomInterface%
+HKLM,System\CurrentControlSet\Control\MediaInterfaces\{A0BAE220-5B56-402a-AF2A-EF62567366BC},IID,1,20,E2,BA,A0, 56,5b, 2A,40, 0xAF, 0x2A, 0xEF, 0x62, 0x56, 0x73, 0x66, 0xBC
+
+; Special Effect Property Page
+HKCR,CLSID\{95EAE60A-0D64-43b0-9787-BBD2421AA093},,,%PropPage_SPEFProp%
+HKCR,CLSID\{95EAE60A-0D64-43b0-9787-BBD2421AA093}\InprocServer32,,,glprop.ax
+HKCR,CLSID\{95EAE60A-0D64-43b0-9787-BBD2421AA093}\InprocServer32,ThreadingModel,,Both
+HKCR,Wow6432Node\CLSID\{95EAE60A-0D64-43b0-9787-BBD2421AA093},,,%PropPage_SPEFProp%
+HKCR,Wow6432Node\CLSID\{95EAE60A-0D64-43b0-9787-BBD2421AA093}\InprocServer32,,,glprop.ax
+HKCR,Wow6432Node\CLSID\{95EAE60A-0D64-43b0-9787-BBD2421AA093}\InprocServer32,ThreadingModel,,Both
+; Associate the property set with the above property page
+HKLM,System\CurrentControlSet\Control\MediaSets\{A0BAE220-5B56-402a-AF2A-EF62567366BC}\PropertyPages\{95EAE60A-0D64-43b0-9787-BBD2421AA093},,,%PropPage_SPEFProp%
+
+; Zoom Effect Property Page
+HKCR,CLSID\{4F6493FC-1A85-418a-B196-7FFDE9643A55},,,%PropPage_ZoomProp%
+HKCR,CLSID\{4F6493FC-1A85-418a-B196-7FFDE9643A55}\InprocServer32,,,glprop.ax
+HKCR,CLSID\{4F6493FC-1A85-418a-B196-7FFDE9643A55}\InprocServer32,ThreadingModel,,Both
+HKCR,Wow6432Node\CLSID\{4F6493FC-1A85-418a-B196-7FFDE9643A55},,,%PropPage_ZoomProp%
+HKCR,Wow6432Node\CLSID\{4F6493FC-1A85-418a-B196-7FFDE9643A55}\InprocServer32,,,glprop.ax
+HKCR,Wow6432Node\CLSID\{4F6493FC-1A85-418a-B196-7FFDE9643A55}\InprocServer32,ThreadingModel,,Both
+; Associate the property set with the above property page
+HKLM,System\CurrentControlSet\Control\MediaSets\{A0BAE220-5B56-402a-AF2A-EF62567366BC}\PropertyPages\{4F6493FC-1A85-418a-B196-7FFDE9643A55},,,%PropPage_ZoomProp%
+
+
+;---------------------------------------------------------------
+;                S e r v i c e s  
+;---------------------------------------------------------------
+
+[glavcam.NT.Services]
+AddService=glavcam, 0x00000002, glavcam.ServiceInstall
+
+[glavcam.NTamd64.Services]
+AddService=glavcam, 0x00000002, glavcam.ServiceInstall
+
+[glavcam.ServiceInstall]
+DisplayName=%glavcam.DeviceDesc%
+ServiceType=%SERVICE_KERNEL_DRIVER%
+StartType=%SERVICE_DEMAND_START%
+ErrorControl=%SERVICE_ERROR_NORMAL%
+ServiceBinary=%12%\glavcam.sys
+
+;---------------------------------------------------------------
+; WT: Hardware keys
+;---------------------------------------------------------------
+[glavcam.NT.HW]
+AddReg=glavcam.NT.HW.AddReg
+
+[glavcam.NTamd64.HW]
+AddReg=glavcam.NT.HW.AddReg
+
+[glavcam.NT.HW.AddReg]
+HKR,,FriendlyName,,%glavcam.DeviceDesc%
+
+;---------------------------------------------------------------
+; WT: for WIA
+;---------------------------------------------------------------
+[glavcam.DeviceData]
+Server=local
+UI Class ID={5d8ef5a3-ac13-11d2-a093-00c04f72dc3c}
+
+;---------------------------------------------------------------
+;                S t r i n g s
+;---------------------------------------------------------------
+
+[Strings]
+; non-localizeable
+Proxy.CLSID="{17CCA71B-ECD7-11D0-B908-00A0C9223196}"
+KSCATEGORY_CAPTURE="{65E8773D-8F56-11D0-A3B9-00A0C9223196}"
+KSCATEGORY_VIDEO="{6994AD05-93EF-11D0-A3CC-00A0C9223196}"
+
+SERVICE_KERNEL_DRIVER=1
+SERVICE_DEMAND_START=3
+SERVICE_ERROR_NORMAL=1
+REG_DWORD=0x00010001
+
+;localizeable
+GLft="GenesysLogic"
+glavcam.DeviceDesc="GL USB2.0 UVC Camera Device"
+glavcam.Reader.FriendlyName="GL USB2.0 UVC Camera Device"
+glavcam.DisplayVersion="13.2.20.0"
+cdname="GLAVCAM Installation Disk"
+PropPage_SPEFProp="GL Special Effect Property Page"
+PropPage_ZoomProp="GL Zoom Property Page"
+PlugIn_CustomInterface= "WDM ICustomInterface handler"
