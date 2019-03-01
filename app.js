@@ -9,16 +9,6 @@ const cameraView = document.querySelector("#camera--view"),
       cameraTrigger = document.querySelector("#camera--trigger")
 
 
-/*navigator.mediaDevices.getUserMedia({video: true})
-  .then(gotMedia)
-  .catch(error => console.error('getUserMedia() error:', error));*/
-
-/*function gotMedia(mediaStream) {
-  const mediaStreamTrack = mediaStream.getVideoTracks()[0];
-  const imageCapture = new ImageCapture(mediaStreamTrack);
-  console.log(imageCapture);
-}*/
-
 function cameraStart() {
     navigator.mediaDevices
         .getUserMedia(constraints)
