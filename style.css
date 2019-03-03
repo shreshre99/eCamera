@@ -14,7 +14,7 @@ html, body{
     Functionality along different internet browsers*/
 }
 #camera--view, #camera--sensor, #camera--output{
-    transform: scaleX(1);
+    transform: scale(1);
     /*filter: FlipH;*/
 }
 #camera--trigger{

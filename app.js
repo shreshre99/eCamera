@@ -1,7 +1,7 @@
 
 
 var constraints = { video: { deviceId: "37acb87543cb1690b5859a5372d2dabd6c9318cc5916505c584fe0c58d847569" }, audio: false };
-
+var zoom = 1;
 
 // Define constants
 const cameraView = document.querySelector("#camera--view"),
@@ -27,6 +27,9 @@ cameraTrigger.onclick = function() {
     cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
     cameraOutput.src = cameraSensor.toDataURL("image/webp");
     cameraOutput.classList.add("taken");
+    zoom = zoom + 1;
+    cameraView.style.transform = scale(zoom, zoom); 
+
     break;
 };
 // Start the video stream when the window loads
