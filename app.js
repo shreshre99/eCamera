@@ -28,6 +28,8 @@ cameraTrigger.onclick = function() {
     cameraOutput.src = cameraSensor.toDataURL("image/webp");
     cameraOutput.classList.add("taken");
     zoom = zoom + 1;
+
+    
     cameraView.style.transform = scale(zoom, zoom); 
 
 
