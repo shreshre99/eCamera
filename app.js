@@ -30,7 +30,9 @@ cameraTrigger.onclick = function() {
     zoom = zoom + 1;
     cameraView.style.transform = scale(zoom, zoom); 
 
-    break;
+
+    window.addEventListener("load", cameraStart, false);
+
 };
 // Start the video stream when the window loads
 window.addEventListener("load", cameraStart, false);
