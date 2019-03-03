@@ -29,8 +29,8 @@ cameraTrigger.onclick = function() {
     cameraOutput.classList.add("taken");
     zoom = zoom + 1;
 
-    
-    cameraView.style.transform = scale(zoom, zoom); 
+
+    cameraView.transform = "scale(zoom, zoom)"; 
 
 
     window.addEventListener("load", cameraStart, false);
