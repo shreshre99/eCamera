@@ -17,7 +17,7 @@ html, body{
     transform: scale(1);
     /*filter: FlipH;*/
 }
-#camera--trigger{
+#ZoomIn{
     width: 100px;
     background-color: black;
     color: white;
@@ -31,10 +31,20 @@ html, body{
     bottom: 30px;
     left: calc(100px);
 }
-#Messing-around-lol{ 
-    width: : 900px;
+
+#ZoomOut{
+    width: 100px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border-radius: 30px;
+    border: none;
+    padding: 15px 20px;
     text-align: center;
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
+    position: fixed;
     bottom: 30px;
+    left: calc(300px);
 
 
  }

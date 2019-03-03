@@ -7,7 +7,8 @@ var zoom = 1;
 const cameraView = document.querySelector("#camera--view"),
     cameraOutput = document.querySelector("#camera--output"),
     cameraSensor = document.querySelector("#camera--sensor"),
-    cameraTrigger = document.querySelector("#camera--trigger")
+    zoomIn = document.querySelector("#ZoomIn"),
+    zoomOut = document.querySelector("#ZoomOut")
 // Access the device camera and stream to cameraView
 function cameraStart() {
     navigator.mediaDevices
@@ -21,20 +22,17 @@ function cameraStart() {
     });
 }
 // Take a picture when cameraTrigger is tapped
-cameraTrigger.onclick = function() {
-    cameraSensor.width = cameraView.videoWidth;
-    cameraSensor.height = cameraView.videoHeight;
-    cameraSensor.getContext("2d").drawImage(cameraView, 0, 0);
-    cameraOutput.src = cameraSensor.toDataURL("image/webp");
-    cameraOutput.classList.add("taken");
+zoomIn.onclick = function() {
     zoom = zoom + 1;
-
-
-    cameraView.transform = "scale(zoom, zoom)"; 
-
-
-    window.addEventListener("load", cameraStart, false);
+    document.getElementById("camera--view").style['WebkitTransform'] = 'scale('+zoom+', '+zoom+')';
 
 };
+
+zoomOut.onclick = function() {
+
+    zoom = zoom - 1;
+
+    document.getElementById("camera--view").style['WebkitTransform'] = 'scale('+zoom+', '+zoom+')';
+}
 // Start the video stream when the window loads
 window.addEventListener("load", cameraStart, false);
