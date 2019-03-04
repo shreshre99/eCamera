@@ -1,6 +1,6 @@
+//WORK ON COMING UP WITH SCRIPT TO FIND OUT THE DEVICEid
 
-
-var constraints = { video: { deviceId: "37acb87543cb1690b5859a5372d2dabd6c9318cc5916505c584fe0c58d847569" }, audio: false };
+var constraints = { video: { deviceId: "8B8AD18E-2C5E-F9F9-7D35-311F363872B8" }, audio: false };
 var zoom = 1;
 
 // Define constants
