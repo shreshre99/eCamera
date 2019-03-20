@@ -7,16 +7,18 @@ const cameraView = document.querySelector("#camera--view"),
     zoomOut = document.querySelector("#ZoomOut")
 // Access the device camera and stream to cameraView
 
-var DEVICEID = 0; 
+var DEVICEID = 0;
+
+#interesting fact right here
 
 navigator.mediaDevices.enumerateDevices()
 .then(function(devices) {
   devices.forEach(function(device) {
     if(device.label === "USB2.0 Camera (eb1a:299f)"){
-        DEVICEID = device.deviceId; 
+        DEVICEID = device.deviceId;
 
     }
-    else{ 
+    else{
         DEVICEID = "B6A9250F-23F7-DCD0-F5D8-A893C0BCB6DA"
     }
   });
@@ -58,7 +60,7 @@ window.addEventListener("load", cameraStart, false);
 
 
 
-/*Third party cloud based systems - redcap (duke used to have it) → data transfer system where you can save/upload/pull from the database system that they already have 
-Firebase (if not encrypted) multiple cloud → webapp development platform, nodejs SDK, NPM bundler 
-Appjs → building desktop applications (just HTML, nodejs, etc) ---> if nodejs, it should be able to incorporate API’s 
+/*Third party cloud based systems - redcap (duke used to have it) → data transfer system where you can save/upload/pull from the database system that they already have
+Firebase (if not encrypted) multiple cloud → webapp development platform, nodejs SDK, NPM bundler
+Appjs → building desktop applications (just HTML, nodejs, etc) ---> if nodejs, it should be able to incorporate API’s
 */
