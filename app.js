@@ -1,61 +1,107 @@
 //WORK ON COMING UP WITH SCRIPT TO FIND OUT THE DEVICEid
 // Define constants
-const cameraView = document.querySelector("#camera--view"),
-    cameraOutput = document.querySelector("#camera--output"),
-    cameraSensor = document.querySelector("#camera--sensor"),
-    zoomIn = document.querySelector("#ZoomIn"),
-    zoomOut = document.querySelector("#ZoomOut")
-// Access the device camera and stream to cameraView
 
-// var DEVICEID = 0;
-//
-// //interesting fact right here
-//
-// navigator.mediaDevices.enumerateDevices()
-// .then(function(devices) {
-//   devices.forEach(function(device) {
-//     if(device.label === "USB2.0 Camera (eb1a:299f)"){
-//         DEVICEID = device.deviceId;
-//
-//     }
-//     else{
-//         DEVICEID = "1523f0af2fa97fd2d2f4146ca10fcfa22e859343553bc9243dc5bd886bee88f6";
-//   }
-// })
-// .catch(function(err) {
-//   console.log(err.name + ": " + err.message);
-// });
-
-DEVICEID = "447475062b867313a918cc28d34a7b9505a646a1272996339d988e04aa07b60b";
-var constraints = { video: { deviceId: DEVICEID }, audio: false };
+const zoomIn = document.querySelector("#ZoomIn"),
+zoomOut = document.querySelector("#ZoomOut")
 var zoom = 1;
 
-function cameraStart() {
-    navigator.mediaDevices
-        .getUserMedia(constraints)
-        .then(function(stream) {
-        track = stream.getTracks()[0];
-        cameraView.srcObject = stream;
-    })
-    .catch(function(error) {
-        console.error("Oops. Something is broken.", error);
-    });
+    
+const video = document.getElementById('video');
+const button = document.getElementById('button');
+const select = document.getElementById('select');
+const stage = document.getElementById('stage');
+let currentStream;
+
+function stopMediaTracks(stream) {
+  stream.getTracks().forEach(track => {
+    track.stop();
+  });
 }
-// Take a picture when cameraTrigger is tapped
+
+function gotDevices(mediaDevices) {
+  select.innerHTML = '';
+  select.appendChild(document.createElement('option'));
+  let count = 1;
+  mediaDevices.forEach(mediaDevice => {
+    if (mediaDevice.kind === 'videoinput') {
+      const option = document.createElement('option');
+      option.value = mediaDevice.deviceId;
+      const label = mediaDevice.label || `Camera ${count++}`;
+      const textNode = document.createTextNode(label);
+      option.appendChild(textNode);
+      select.appendChild(option);
+    }
+  });
+}
+
+button.addEventListener('click', event => {
+  if (typeof currentStream !== 'undefined') {
+    stopMediaTracks(currentStream);
+  }
+  const videoConstraints = {};
+  if (select.value === '') {
+    videoConstraints.facingMode = 'environment';
+  } else {
+    videoConstraints.deviceId = { exact: select.value };
+  }
+  const constraints = {
+    video: videoConstraints,
+    audio: false
+  };
+  navigator.mediaDevices
+    .getUserMedia(constraints)
+    .then(stream => {
+      currentStream = stream;
+      video.srcObject = stream;
+      stage.srcObject = stream; 
+      return navigator.mediaDevices.enumerateDevices();
+    })
+    .then(gotDevices)
+    .catch(error => {
+      console.error(error);
+    });
+});
+
+navigator.mediaDevices.enumerateDevices().then(gotDevices);
+
 zoomIn.onclick = function() {
-    zoom = zoom + 1;
-    document.getElementById("camera--view").style['WebkitTransform'] = 'scale('+zoom+', '+zoom+')';
+   zoom = zoom + 1;
+     document.getElementById('video').style['WebkitTransform'] = 'scale('+zoom+', '+zoom+')';
 
 };
 
-zoomOut.onclick = function() {
 
-    zoom = zoom - 1;
 
-    document.getElementById("camera--view").style['WebkitTransform'] = 'scale('+zoom+', '+zoom+')';
-}
-// Start the video stream when the window loads
-window.addEventListener("load", cameraStart, false);
+// DEVICEID = "8783fc9463d9e905415a7b7c73e60b04f4b4ebbb138c05348499bf43a5bee033";
+// var constraints = { video: { deviceId: DEVICEID }, audio: false };
+// var zoom = 1;
+
+// function cameraStart() {
+//     navigator.mediaDevices
+//         .getUserMedia(constraints)
+//         .then(function(stream) {
+//         track = stream.getTracks()[0];
+//         cameraView.srcObject = stream;
+//     })
+//     .catch(function(error) {
+//         console.error("Oops. Something is broken.", error);
+//     });
+// }
+// // Take a picture when cameraTrigger is tapped
+// zoomIn.onclick = function() {
+//     zoom = zoom + 1;
+//     document.getElementById("camera--view").style['WebkitTransform'] = 'scale('+zoom+', '+zoom+')';
+
+// };
+
+// zoomOut.onclick = function() {
+
+//     zoom = zoom - 1;
+
+//     document.getElementById("camera--view").style['WebkitTransform'] = 'scale('+zoom+', '+zoom+')';
+// }
+// // Start the video stream when the window loads
+// window.addEventListener("load", cameraStart, false);
 
 
 

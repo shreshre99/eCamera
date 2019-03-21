@@ -18,25 +18,42 @@
 <body>
 
 	<!----Camera---->
-	<main id = "camera">
+<!-- 	<main id = "camera">
 
-		<!-- Camera view -->
     	<video id="camera--view" autoplay playsinline></video>
 
-		 <!-- Camera sensor -->
     	<canvas id="camera--sensor"></canvas>
 
-    	<!-- Camera output -->
     	<img src="//:0" alt="" id="camera--output">
 
-    	<!-- Camera trigger -->
     	<button id="ZoomIn">Zoom In</button>
 
 		<button id="ZoomOut">Zoom Out</button>
 
     	<button id="Messing-around-lol">controls</button>
 
-	<main>
+	<main> -->
+    <main>
+        <div class="controls">
+            <button id="button">Get camera</button>
+            <select id="select">
+                <option></option>
+        </select>
+
+    
+    </div>
+        
+        <button id="ZoomIn">Zoom In</button>
+        
+        <button id="ZoomOut">Zoom Out</button>
+        
+        <video id="video" autoplay playsinline></video>
+
+        <div id="stage"><video controls>
+            
+        </video></div>
+    
+    </main>
 
 <!-- Reference to your JavaScript file -->
 <script src="app.js"></script>
