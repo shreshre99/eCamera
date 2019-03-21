@@ -7,27 +7,26 @@ const cameraView = document.querySelector("#camera--view"),
     zoomOut = document.querySelector("#ZoomOut")
 // Access the device camera and stream to cameraView
 
-var DEVICEID = 0;
+// var DEVICEID = 0;
+//
+// //interesting fact right here
+//
+// navigator.mediaDevices.enumerateDevices()
+// .then(function(devices) {
+//   devices.forEach(function(device) {
+//     if(device.label === "USB2.0 Camera (eb1a:299f)"){
+//         DEVICEID = device.deviceId;
+//
+//     }
+//     else{
+//         DEVICEID = "1523f0af2fa97fd2d2f4146ca10fcfa22e859343553bc9243dc5bd886bee88f6";
+//   }
+// })
+// .catch(function(err) {
+//   console.log(err.name + ": " + err.message);
+// });
 
-#interesting fact right here
-
-navigator.mediaDevices.enumerateDevices()
-.then(function(devices) {
-  devices.forEach(function(device) {
-    if(device.label === "USB2.0 Camera (eb1a:299f)"){
-        DEVICEID = device.deviceId;
-
-    }
-    else{
-        DEVICEID = "B6A9250F-23F7-DCD0-F5D8-A893C0BCB6DA"
-    }
-  });
-})
-.catch(function(err) {
-  console.log(err.name + ": " + err.message);
-});
-
-
+DEVICEID = "447475062b867313a918cc28d34a7b9505a646a1272996339d988e04aa07b60b";
 var constraints = { video: { deviceId: DEVICEID }, audio: false };
 var zoom = 1;
 
