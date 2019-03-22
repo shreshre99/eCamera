@@ -31,21 +31,23 @@ main {
   background: #333e5a;
 }
 
-.demostage{
-  width:400px;
-  height:300px;
-  position:relative;
-  overflow:hidden;
-}
 
-video {
+/*video {
   width: 100%;
   max-width: 1000px;
   display: block;
   margin: 0 auto;
-  /*position: absolute;*/
-  /*object-fit: cover;*/
+  /*position: absolute;
+  object-fit: cover;
 
+}*/
+
+.booth{
+	width:400px;
+	background: :#ccc;
+	border:10px solid #ddd;
+	margin: 0 auto;
+	overflow: hidden
 }
 
 #ZoomIn{

@@ -10,7 +10,21 @@ const video = document.getElementById('video');
 const button = document.getElementById('button');
 const select = document.getElementById('select');
 const stage = document.getElementById('stage');
-let currentStream;
+
+
+var canvas = document.getElementById('c');
+var context = canvas.getContext('2d');
+var cw = Math.floor(canvas.clientWidth / 100);
+var ch = Math.floor(canvas.clientHeight / 100);
+canvas.width = cw;
+canvas.height = ch;
+
+function draw(v,c,w,h) {
+    if(v.paused || v.ended) return false;
+    c.drawImage(v,0,0,w,h);
+    setTimeout(draw,20,v,c,w,h);
+}
+
 
 function stopMediaTracks(stream) {
   stream.getTracks().forEach(track => {
@@ -34,6 +48,7 @@ function gotDevices(mediaDevices) {
   });
 }
 
+
 button.addEventListener('click', event => {
   if (typeof currentStream !== 'undefined') {
     stopMediaTracks(currentStream);
@@ -52,9 +67,8 @@ button.addEventListener('click', event => {
     .getUserMedia(constraints)
     .then(stream => {
       currentStream = stream;
-      video.srcObject = stream;
-      stage.srcObject = stream; 
-      return navigator.mediaDevices.enumerateDevices();
+    draw(v,context,cw,ch);      
+    return navigator.mediaDevices.enumerateDevices();
     })
     .then(gotDevices)
     .catch(error => {
