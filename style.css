@@ -43,7 +43,8 @@ main {
 }*/
 
 .booth{
-	width:400px;
+	width:1000px;
+	height:90%;
 	background: :#ccc;
 	border:10px solid #ddd;
 	margin: 0 auto;

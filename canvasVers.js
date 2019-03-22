@@ -79,13 +79,4 @@
 		setTimeout(draw, 10, video, context, width, height);
 	}
 
-
-
-
-
-
-
-
-
-
 })();
