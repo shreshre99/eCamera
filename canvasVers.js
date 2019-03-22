@@ -6,7 +6,7 @@
 	const videoConstraints = {};
 	const button = document.getElementById('button');
 	const zoomIn = document.getElementById("ZoomIn"),
-		  zoomOut = document.querySelector("#ZoomOut");
+		  zoomOut = document.getElementById("ZoomOut");
 	var zoom = 1;
 
 
@@ -69,13 +69,11 @@
 		//draw(video, context, 400, 300); 
 	});
 
+	zoomOut.addEventListener('click', event =>{
+     zoom = zoom - 1;
+     document.getElementById("video").style['WebkitTransform'] = 'scale('+zoom+', '+zoom+')';
+	});
 
-	function drawZoomIn(video, context, width, height){
-		context.drawImage(video,video.width / 4, video.height / 4, video.width / 2, video.height / 2, 0, 0, width, height);
-		setTimeout(draw, 10, video, context, width, height);
-	
-
-	}
 	function draw(video, context, width, height){ 
 		context.drawImage(video, 0, 0, width, height);
 		setTimeout(draw, 10, video, context, width, height);
