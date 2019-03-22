@@ -2,15 +2,18 @@ html,
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  width: 100%:
 }
 
 html {
   height: 100%;
+
 }
 
 body {
   font-family: Helvetica, Arial, sans-serif;
-  min-height: 100%;
+  /* min-height: 100%; */
   display: grid;
   grid-template-rows: 1fr auto;
 }
@@ -30,21 +33,40 @@ main {
   padding: 0.5em 0;
   background: #333e5a;
 }
+video{
+  /* Full height */
+  min-height: 100%;
+  min-width: 100%;
 
+  width: auto;
+  height: auto;
 
-/*video {
-  width: 100%;
-  max-width: 1000px;
-  display: block;
-  margin: 0 auto;
-  /*position: absolute;
-  object-fit: cover;
+  position: fixed;
+  top: 30px;
+  left: 0;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    object-fit: cover;
+    background-size: cover;
 
-}*/
+}
 
 .booth{
-	width:1000px;
-	height:90%;
+  /* Full height */
+  min-height: 100%;
+  min-width: 100%;
+
+  width: auto;
+  height: auto;
+
+  position: fixed;
+  top: 30px;
+  left: 0;
+
+
 	background: :#ccc;
 	border:10px solid #ddd;
 	margin: 0 auto;
@@ -99,7 +121,7 @@ main {
 }
 #camera--view, #camera--sensor, #camera--output{
     transform: scale(1);
- 
+
 }
 #ZoomIn{
     width: 100px;
